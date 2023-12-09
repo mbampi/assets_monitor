@@ -1,0 +1,118 @@
+/* src/components/MonitoredAssetsPage.css */
+
+.monitored-assets-container {
+    background-color: #043649;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.asset-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 10px;
+    align-items: center;
+    background: linear-gradient(145deg, #1e6c78, #216d76);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s ease;
+}
+
+.asset-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.asset-name span {
+    margin-bottom: 5px;
+}
+
+.asset-price,
+.asset-floor,
+.asset-roof {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.asset-price svg,
+.asset-floor svg,
+.asset-roof svg {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.manage-assets-link {
+    display: block;
+    text-align: center;
+    background-color: #1a535b;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+.manage-assets-link:hover {
+    background-color: #216d76;
+    transform: translateY(-2px);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .monitored-assets-container {
+        padding: 15px;
+        margin: 20px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .asset-item {
+        grid-template-columns: 1fr auto;
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .asset-price,
+    .asset-floor,
+    .asset-roof {
+        font-size: 0.8em;
+    }
+
+    .manage-assets-link {
+        padding: 10px 15px;
+    }
+}
+
+.asset-chart {
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-waiting-data {
+    color: #043649;
+}

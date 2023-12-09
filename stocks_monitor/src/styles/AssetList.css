@@ -1,0 +1,123 @@
+/* src/styles/AssetListPage.css */
+
+.asset-list-container {
+    background-color: #043649;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.asset-list-container h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+}
+
+.asset-list-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.asset-list-container li {
+    background: linear-gradient(145deg, #1e6c78, #216d76);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.asset-list-container li button {
+    background-color: #1a535b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.asset-list-container a {
+    color: #216d76;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.asset-list-container a:hover {
+    text-decoration: underline;
+}
+
+.asset-list-container .asset-list-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    background: linear-gradient(145deg, #1e6c78, #216d76);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+.asset-item button.enable {
+    background-color: #28a745;
+    /* Green color for enable button */
+    color: white;
+}
+
+.asset-item button.disable {
+    background-color: #dc3545;
+    /* Red color for disable button */
+    color: white;
+}
+
+.asset-item button:hover {
+    opacity: 0.8;
+}
+
+.asset-symbol {
+    font-size: 1.2em;
+    /* Making the symbol larger */
+    font-weight: bold;
+    /* Optionally making it bold for more emphasis */
+    color: #fff;
+    /* White color for high visibility */
+    margin-right: 10px;
+    /* Spacing between symbol and name */
+}
+
+.asset-name {
+    font-size: 0.9em;
+    color: #a9b1b7;
+}
+
+.filter-button {
+    background-color: #0e7c86;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.filter-button:hover {
+    background-color: #0a5a60;
+}
+
+.filter-button svg {
+    margin: 10px;
+}
