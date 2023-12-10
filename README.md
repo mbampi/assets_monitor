@@ -58,7 +58,6 @@ graph LR
 
 ## TODO
 
-- Adicionar sistema de envio de emails
 - Melhorar sistema de consulta de preços, utilizando a frequência estipulada em cada ativo
 - Melhorar docker-compose e adicionar frontend nele
 - Aprimorar a interface web

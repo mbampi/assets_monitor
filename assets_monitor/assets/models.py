@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Asset is a model that contains information about a stock asset.
 class Asset(models.Model):
     symbol = models.CharField(max_length=10, unique=True)
@@ -30,7 +31,18 @@ class MonitoredAsset(models.Model):
     upper_tunnel = models.DecimalField(max_digits=10, decimal_places=4)
     lower_tunnel = models.DecimalField(max_digits=10, decimal_places=4)
     email = models.EmailField(max_length=100)
-    frequency = models.IntegerField(default=10)    
+    frequency = models.IntegerField(default=10)
+    last_email_sent = models.DateTimeField(default=None)
 
     def __str__(self):
-        return self.asset.symbol + " " + str(self.last_price) + " " + str(self.upper_tunnel) + " " + str(self.lower_tunnel) + " " + self.email
+        return (
+            self.asset.symbol
+            + " "
+            + str(self.last_price)
+            + " "
+            + str(self.upper_tunnel)
+            + " "
+            + str(self.lower_tunnel)
+            + " "
+            + self.email
+        )
