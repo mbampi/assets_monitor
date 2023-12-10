@@ -13,6 +13,21 @@ Os seguintes requisitos funcionais são necessários:
 - A interface web deve permitir consultar os preços armazenados dos ativos cadastrados.
 - Enviar e-mail para o investidor sugerindo a compra sempre que o preço de um ativo monitorado cruzar o seu limite inferior do túnel, e sugerindo a venda sempre que o preço de um ativo monitorado cruzar o seu limite superior do túnel
 
+## Screenshots
+
+### Tela de ativos disponíveis
+
+![Tela de ativos disponíveis](./img/asset_list.png)
+
+### Tela de ativos monitorados
+
+![Tela de ativos monitorados](./img/monitored_assets.png)
+
+### Tela de ativo monitorado com gráfico
+
+![Tela de ativo monitorado com gráfico](./img/asset_chart.png)
+
+
 ## Como rodar o projeto
 
 ```bash
