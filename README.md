@@ -72,10 +72,6 @@ graph LR
     API -- HTTP --> UI
 ```
 
-## TODO
-
-- Melhorar docker-compose e adicionar frontend nele
-
 ## Futuras Melhorias
 
 - Adicionar gerenciamento de usuários
