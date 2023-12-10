@@ -83,7 +83,6 @@ graph LR
 - Adicionar uma camada de cache com Redis
 - Utilizar um banco de dados mais robusto, como o PostgreSQL
 - Receber os dados dos ativos em tempo real, utilizando WebSockets ou até mesmo uma sessão FIX com a B3
-- Utilizar um serviço de monitoramento de métricas, como o Prometheus
 - Melhorar validaçao de dados no backend
 - Melhorar validaçao de dados no frontend
 - Tornar frontend responsivo
