@@ -19,7 +19,6 @@ const EnableMonitoringModal: React.FC<Props> = ({ asset, isOpen, onRequestClose,
     const [frequency, setFrequency] = useState('');
     const [currentPrice, setCurrentPrice] = useState<number>(0);
 
-
     // when modal opens, get the current price of the asset requesting the asset details endpoint
     // when modal closes, clear the current price.
     useEffect(() => {

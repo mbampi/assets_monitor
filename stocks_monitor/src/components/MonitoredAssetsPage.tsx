@@ -20,7 +20,7 @@ const MonitoredAssetsPage: React.FC = () => {
 
         fetchMonitoredAssets();
 
-        const intervalId = setInterval(fetchMonitoredAssets, 10000);
+        const intervalId = setInterval(fetchMonitoredAssets, 10000); // 10 seconds
 
         return () => clearInterval(intervalId);
     }, []);

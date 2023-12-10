@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Asset } from '../types/types';
+import React, { useEffect, useState } from 'react';
+import { Asset, MonitoredAsset } from '../types/types';
 import SearchBox from './SearchBox';
 import { Link } from 'react-router-dom';
 import './../styles/AssetList.css';
@@ -17,7 +17,6 @@ const AssetList: React.FC<Props> = ({ assets, onEnableMonitoring, onDisableMonit
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
     const [showMonitoredOnly, setShowMonitoredOnly] = useState(false);
-
     const filteredAssets = assets
         .filter(asset => asset.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .filter(asset => !showMonitoredOnly || asset.is_monitored);
@@ -40,7 +39,7 @@ const AssetList: React.FC<Props> = ({ assets, onEnableMonitoring, onDisableMonit
                 <button
                     className="filter-button"
                     onClick={() => setShowMonitoredOnly(!showMonitoredOnly)}>
-                    <FaFilter /> {/* Filter icon */}
+                    <FaFilter />
                 </button>
             </div>
             <ul>

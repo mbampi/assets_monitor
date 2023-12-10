@@ -69,9 +69,9 @@ class ToggleMonitoring(APIView):
                     return HttpResponseBadRequest('lower_tunnel must be lower than upper_tunnel')
 
                 MonitoredAsset.objects.update_or_create(asset=asset, last_price=0, upper_tunnel=upper_tunnel, lower_tunnel=lower_tunnel, email=email)
-                
+
             else:
-                MonitoredAsset.objects.get(asset=asset).delete()
+                MonitoredAsset.objects.filter(asset=asset).delete()
 
             action = 'enabled' if enable else 'disabled'
             return Response({'message': f'Monitoring {action} for asset {symbol}.'})

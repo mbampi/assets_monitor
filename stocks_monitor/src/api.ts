@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Asset, MonitoredAsset, Quotation } from './types/types';
 
-const API_URL = 'http://localhost:8000'; // Adjust as needed
+const API_URL = 'http://localhost:8000';
 
 export const getAssets = () => axios.get<Asset[]>(`${API_URL}/assets/`);
 export const getAsset = (symbol: string) => axios.get<Asset>(`${API_URL}/assets/${symbol}`);

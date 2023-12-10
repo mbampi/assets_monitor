@@ -30,7 +30,7 @@ class MonitoredAsset(models.Model):
     upper_tunnel = models.DecimalField(max_digits=10, decimal_places=4)
     lower_tunnel = models.DecimalField(max_digits=10, decimal_places=4)
     email = models.EmailField(max_length=100)
-    frequency = models.IntegerField(default=10)
+    frequency = models.IntegerField(default=10)    
 
     def __str__(self):
         return self.asset.symbol + " " + str(self.last_price) + " " + str(self.upper_tunnel) + " " + str(self.lower_tunnel) + " " + self.email
