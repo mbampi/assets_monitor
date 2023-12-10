@@ -35,23 +35,29 @@ def fetch_and_store_asset_prices():
 
 
 def send_buy_email(monitoredAsset: MonitoredAsset, price: float):
-    send_mail(
-        f'{monitoredAsset.asset.symbol} - Alerta de compra',
-        f'O preço de {monitoredAsset.asset.symbol} atingiu R$ {price} abaixo do túnel inferior de R$ {monitoredAsset.lower_tunnel}',
-        from_email='matheusbampi@hotmail.com',
-        auth_user='matheusbampi@hotmail.com',
-        auth_password='vivtyj-maQte2-duhsej',
-        recipient_list=[monitoredAsset.email],
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            f'{monitoredAsset.asset.symbol} - Alerta de compra',
+            f'O preço de {monitoredAsset.asset.symbol} atingiu R$ {price.toFixed(2)} abaixo do túnel inferior de R$ {monitoredAsset.lower_tunnel.toFixed(2)}',
+            from_email='matheusbampi@hotmail.com',
+            recipient_list=[monitoredAsset.email],
+            fail_silently=False,
+        )
+    except Exception as e:
+        logging.error(f'Error sending email: {e}')
+        raise e
+    logging.info(f'Buy email sent to {monitoredAsset.email}')
 
 def send_sell_email(monitoredAsset: MonitoredAsset, price: float):
-    send_mail(
-        f'{monitoredAsset.asset.symbol} - Alerta de venda',
-        f'O preço de {monitoredAsset.asset.symbol} atingiu R$ {price} acima do túnel superior de R$ {monitoredAsset.upper_tunnel}',
-        from_email='matheusbampi@hotmail.com',
-        auth_user='matheusbampi@hotmail.com',
-        auth_password='vivtyj-maQte2-duhsej',
-        recipient_list=[monitoredAsset.email],
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            f'{monitoredAsset.asset.symbol} - Alerta de venda',
+            f'O preço de {monitoredAsset.asset.symbol} atingiu R$ {price.toFixed(2)} acima do túnel superior de R$ {monitoredAsset.upper_tunnel.toFixed(2)}',
+            from_email='matheusbampi@hotmail.com',
+            recipient_list=[monitoredAsset.email],
+            fail_silently=False,
+        )
+    except Exception as e:
+        logging.error(f'Error sending email: {e}')
+        raise e
+    logging.info(f'Sell email sent to {monitoredAsset.email}')
