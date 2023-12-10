@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "51f62405-a64f-40b7-9440-9b5a6c68a31f",
+		"name": "Assets Monitor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9640535"
+	},
+	"item": [
+		{
+			"name": "assets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/assets",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"assets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "monitored assets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/assets/monitored",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"assets",
+						"monitored"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "asset detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/assets/:symbol",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"assets",
+						":symbol"
+					],
+					"variable": [
+						{
+							"key": "symbol",
+							"value": "ALPA4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "asset quotations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/assets/quotation/:symbol",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"assets",
+						"quotation",
+						":symbol"
+					],
+					"variable": [
+						{
+							"key": "symbol",
+							"value": "ALPA4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "enable monitoring",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lower_tunnel\": 1,\n    \"upper_tunnel\": 20,\n    \"email\": \"email@example.com\",\n    \"frequency\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/assets/enable-monitoring/:symbol",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"assets",
+						"enable-monitoring",
+						":symbol"
+					],
+					"variable": [
+						{
+							"key": "symbol",
+							"value": "ALPA4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "disable monitoring",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/assets/enable-monitoring/:symbol",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"assets",
+						"enable-monitoring",
+						":symbol"
+					],
+					"variable": [
+						{
+							"key": "symbol",
+							"value": "ALPA4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}

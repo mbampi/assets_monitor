@@ -36,6 +36,7 @@ docker-compose up
 
 Endereço da interface web: http://localhost:3000
 
+[Postman Collection](./assets_monitor.postman_collection.json)
 
 ## Tecnologias
 
