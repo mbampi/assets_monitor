@@ -1,0 +1,63 @@
+.monitored-assets-list .asset-item {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transform: scale(1);
+    color: #333;
+}
+
+.asset-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.asset-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.asset-name span {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #216d76;
+}
+
+.asset-price,
+.asset-frequency,
+.asset-roof,
+.asset-floor {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.asset-price svg,
+.asset-frequency svg,
+.asset-roof svg,
+.asset-floor svg {
+    margin-right: 5px;
+    color: #216d76;
+    /* Icon color */
+}
+
+.asset-chart {
+    /* width: 100%; */
+    margin-top: 15px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .asset-info {
+        grid-template-columns: 1fr;
+    }
+}

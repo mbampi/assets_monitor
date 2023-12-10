@@ -1,78 +1,76 @@
 from celery import shared_task
 from django.core.mail import send_mail
-import datetime
+from django.utils import timezone
 import logging
+import os
 
 from .models import MonitoredAsset, Quotation
 from .api import get_asset_quote
 
-
 @shared_task
 def fetch_and_store_asset_prices():
-    monitored_assets = MonitoredAsset.objects.all()
+    for monit_asset in MonitoredAsset.objects.all():
+        if is_time_to_check(monit_asset):
+            price = fetch_and_store_price(monit_asset)
+            if price is not None:
+                check_tunnel_price_and_send_email(monit_asset, price)
 
-    for monit_asset in monitored_assets:
-        asset = monit_asset.asset
-        price = get_asset_quote(asset.symbol)
-        if price is None:
-            logging.error(f"Error fetching price for {asset.symbol}")
-            continue
-        logging.info(f"Price for {asset.symbol}: {price} type: {type(price)}")
+def is_time_to_check(monit_asset: MonitoredAsset) -> bool:
+    if monit_asset.last_price_check is None:
+        return True
+    elapsed_time = (timezone.now() - monit_asset.last_price_check).total_seconds()
+    return elapsed_time >= monit_asset.frequency * 60
 
-        Quotation.objects.create(
-            asset=asset,
-            price=price,
-            date=datetime.date.today(),
-            time=datetime.datetime.now().time(),
-        )
+def fetch_and_store_price(monit_asset: MonitoredAsset) -> float:
+    price = get_asset_quote(monit_asset.asset.symbol)
+    if price is None:
+        logging.error(f"Error fetching price for {monit_asset.asset.symbol}")
+        return None
 
-        monit_asset.last_price = price
-        monit_asset.last_price_check = datetime.datetime.now()
-        monit_asset.save()
+    Quotation.objects.create(
+        asset=monit_asset.asset,
+        price=price,
+        date=timezone.now().date(),
+        time=timezone.now().time(),
+    )
 
-        # Check if price is above upper tunnel or below lower tunnel
-        # Send email if it is. But only send one email per day.
-        if (monit_asset.last_email_sent is None) or (
-            monit_asset.last_email_sent.date() != datetime.date.today()
-        ):
-            if price >= monit_asset.upper_tunnel:
-                logging.info(f"Price for {asset.symbol} is above upper tunnel")
-                send_sell_email(monit_asset, price)
-                monit_asset.last_email_sent = datetime.datetime.now()
-                monit_asset.save()
+    monit_asset.last_price = price
+    monit_asset.last_price_check = timezone.now()
+    monit_asset.save()
+    return price
 
-            elif price <= monit_asset.lower_tunnel:
-                logging.info(f"Price for {asset.symbol} is below lower tunnel")
-                send_buy_email(monit_asset, price)
-                monit_asset.last_email_sent = datetime.datetime.now()
-                monit_asset.save()
+def check_tunnel_price_and_send_email(monit_asset: MonitoredAsset, price: float):
+    if (monit_asset.last_email_sent is None) or (monit_asset.last_email_sent.date() != timezone.now().date()):
+        if price >= monit_asset.upper_tunnel:
+            send_email(monit_asset, price, 'sell')
+        elif price <= monit_asset.lower_tunnel:
+            send_email(monit_asset, price, 'buy')
 
-
-def send_buy_email(monitoredAsset: MonitoredAsset, price: float):
+def send_email(monitored_asset: MonitoredAsset, price: float, action: str):
+    subject, message = create_email_content(monitored_asset, price, action)
     try:
         send_mail(
-            f"{monitoredAsset.asset.symbol} - Alerta de compra",
-            f"O preço de {monitoredAsset.asset.symbol} atingiu R$ {price.toFixed(2)} abaixo do túnel inferior de R$ {monitoredAsset.lower_tunnel.toFixed(2)}",
-            from_email="matheusbampi@hotmail.com",
-            recipient_list=[monitoredAsset.email],
+            subject,
+            message,
+            from_email=os.getenv('SENDER_EMAIL', 'inoa@test.com'),
+            recipient_list=[monitored_asset.email],
             fail_silently=False,
         )
+        logging.info(f"{action.title()} email sent to {monitored_asset.email}")
+        monitored_asset.last_email_sent = timezone.now()
+        monitored_asset.save()
     except Exception as e:
-        logging.error(f"Error sending email: {e}")
-        raise e
-    logging.info(f"Buy email sent to {monitoredAsset.email}")
+        logging.error(f"Error sending {action} email: {e}")
 
-
-def send_sell_email(monitoredAsset: MonitoredAsset, price: float):
-    try:
-        send_mail(
-            f"{monitoredAsset.asset.symbol} - Alerta de venda",
-            f"O preço de {monitoredAsset.asset.symbol} atingiu R$ {price.toFixed(2)} acima do túnel superior de R$ {monitoredAsset.upper_tunnel.toFixed(2)}",
-            from_email="matheusbampi@hotmail.com",
-            recipient_list=[monitoredAsset.email],
-            fail_silently=False,
+def create_email_content(monitored_asset: MonitoredAsset, price: float, action: str) -> tuple:
+    symbol = monitored_asset.asset.symbol
+    if action == 'sell':
+        return (
+            f"{symbol} - Alerta de venda",
+            f"O preço de {symbol} atingiu R$ {price:.2f} acima do túnel superior de R$ {monitored_asset.upper_tunnel:.2f}"
         )
-    except Exception as e:
-        logging.error(f"Error sending email: {e}")
-        raise e
-    logging.info(f"Sell email sent to {monitoredAsset.email}")
+    elif action == 'buy':
+        return (
+            f"{symbol} - Alerta de compra",
+            f"O preço de {symbol} atingiu R$ {price:.2f} abaixo do túnel inferior de R$ {monitored_asset.lower_tunnel:.2f}"
+        )

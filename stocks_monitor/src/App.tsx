@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MonitoredAssetsPage from './components/MonitoredAssetsPage';
-import AssetList from './components/AssetList';
+import AssetList from './components/AssetListPage';
 import { getAssets, enableMonitoring, disableMonitoring, getMonitoredAssets } from './api';
 import { Asset } from './types/types';
 
@@ -11,9 +11,11 @@ const App: React.FC = () => {
   const email = "matheusbampi@hotmail.com"
 
   useEffect(() => {
+
     getAssets()
       .then(response => {
         let allAssets = response.data;
+
         getMonitoredAssets()
           .then(monitoredAssets => {
             monitoredAssets.forEach(monitoredAsset => {
@@ -23,6 +25,7 @@ const App: React.FC = () => {
             });
             setAssets(allAssets);
           }).catch(error => console.error('Error fetching monitored assets:', error));
+
       })
       .catch(error => console.error('Error fetching assets:', error));
   }, []);

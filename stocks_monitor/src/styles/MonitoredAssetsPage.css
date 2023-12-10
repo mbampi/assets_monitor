@@ -16,46 +16,10 @@ h2 {
     font-size: 2em;
 }
 
-ul {
+.monitored-assets-list {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.asset-item {
-    display: grid;
-    grid-template-columns: 1fr auto auto auto;
-    gap: 10px;
-    align-items: center;
-    background: linear-gradient(145deg, #1e6c78, #216d76);
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.2s ease;
-}
-
-.asset-item:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.asset-name span {
-    margin-bottom: 5px;
-}
-
-.asset-price,
-.asset-floor,
-.asset-roof {
-    display: flex;
-    align-items: center;
-    font-size: 0.9em;
-}
-
-.asset-price svg,
-.asset-floor svg,
-.asset-roof svg {
-    margin-right: 5px;
-    font-size: 1.2em;
 }
 
 .manage-assets-link {

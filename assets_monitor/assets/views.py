@@ -77,6 +77,8 @@ class ToggleMonitoring(APIView):
                     upper_tunnel=upper_tunnel,
                     lower_tunnel=lower_tunnel,
                     email=email,
+                    frequency=frequency,
+                    last_email_sent=None,
                 )
 
             else:

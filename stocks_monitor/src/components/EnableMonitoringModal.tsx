@@ -22,10 +22,8 @@ const EnableMonitoringModal: React.FC<Props> = ({ asset, isOpen, onRequestClose,
     // when modal opens, get the current price of the asset requesting the asset details endpoint
     // when modal closes, clear the current price.
     useEffect(() => {
-        console.log('isOpen', isOpen);
         if (isOpen) {
             getAsset(asset.symbol).then(response => {
-                console.log('response', response);
                 setCurrentPrice(response.data.price);
             }).catch(error => console.error('Error fetching asset:', error));
         } else {

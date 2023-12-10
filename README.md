@@ -58,10 +58,7 @@ graph LR
 
 ## TODO
 
-- Melhorar sistema de consulta de preços, utilizando a frequência estipulada em cada ativo
 - Melhorar docker-compose e adicionar frontend nele
-- Aprimorar a interface web
-- Aprimorar gráfico de preços
 
 ## Futuras Melhorias
 

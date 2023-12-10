@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Asset, MonitoredAsset } from '../types/types';
+import React, { useState } from 'react';
+import { Asset } from '../types/types';
 import SearchBox from './SearchBox';
 import { Link } from 'react-router-dom';
-import './../styles/AssetList.css';
+import './../styles/AssetListPage.css';
 import EnableMonitoringModal from './EnableMonitoringModal';
 import { FaFilter } from 'react-icons/fa';
 

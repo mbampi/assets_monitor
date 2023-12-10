@@ -32,7 +32,8 @@ class MonitoredAsset(models.Model):
     lower_tunnel = models.DecimalField(max_digits=10, decimal_places=4)
     email = models.EmailField(max_length=100)
     frequency = models.IntegerField(default=10)
-    last_email_sent = models.DateTimeField(default=None)
+    last_email_sent = models.DateTimeField(default=None, null=True)
+    last_price_check = models.DateTimeField(default=None, null=True)
 
     def __str__(self):
         return (
