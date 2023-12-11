@@ -10,13 +10,14 @@ type Props = {
     asset: Asset;
     isOpen: boolean;
     onRequestClose: () => void;
-    onEnableMonitoring: (symbol: string, lower_tunnel: number, upper_tunnel: number, frequency: number) => void;
+    onEnableMonitoring: (symbol: string, lower_tunnel: number, upper_tunnel: number, frequency: number, email: string) => void;
 };
 
 const EnableMonitoringModal: React.FC<Props> = ({ asset, isOpen, onRequestClose, onEnableMonitoring }) => {
     const [lowerTunnel, setLowerTunnel] = useState('');
     const [upperTunnel, setUpperTunnel] = useState('');
     const [frequency, setFrequency] = useState('');
+    const [email, setEmail] = useState('');
     const [currentPrice, setCurrentPrice] = useState<number>(0);
 
     // when modal opens, get the current price of the asset requesting the asset details endpoint
@@ -32,7 +33,7 @@ const EnableMonitoringModal: React.FC<Props> = ({ asset, isOpen, onRequestClose,
     }, [isOpen, asset]);
 
     const handleEnableMonitoring = () => {
-        onEnableMonitoring(asset.symbol, parseFloat(lowerTunnel), parseFloat(upperTunnel), parseInt(frequency));
+        onEnableMonitoring(asset.symbol, parseFloat(lowerTunnel), parseFloat(upperTunnel), parseInt(frequency), email);
     };
 
     return (
@@ -65,6 +66,12 @@ const EnableMonitoringModal: React.FC<Props> = ({ asset, isOpen, onRequestClose,
                 value={frequency}
                 onChange={(e) => setFrequency(e.target.value)}
                 placeholder="Frequência de Monitoramento (minutos)"
+            />
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
             />
             <button onClick={handleEnableMonitoring}>Confirmar</button>
             <button onClick={onRequestClose}>Fechar</button>

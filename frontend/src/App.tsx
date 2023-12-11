@@ -8,7 +8,6 @@ import { Asset } from './types/types';
 
 const App: React.FC = () => {
   const [assets, setAssets] = useState<Asset[]>([]);
-  const email = "matheusbampi@hotmail.com"
 
   useEffect(() => {
 
@@ -38,7 +37,7 @@ const App: React.FC = () => {
     });
   };
 
-  const handleEnableMonitoring = (symbol: string, lower_tunnel: number, upper_tunnel: number, frequency: number) => {
+  const handleEnableMonitoring = (symbol: string, lower_tunnel: number, upper_tunnel: number, frequency: number, email: string) => {
     enableMonitoring(symbol, email, lower_tunnel, upper_tunnel, frequency).then(() => {
       setAssets(assets.map(asset =>
         asset.symbol === symbol ? { ...asset, is_monitored: true } : asset

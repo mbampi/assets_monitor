@@ -9,7 +9,7 @@ import { FaFilter } from 'react-icons/fa';
 interface Props {
     assets: Asset[];
     onDisableMonitoring: (symbol: string) => void;
-    onEnableMonitoring: (symbol: string, lower_tunnel: number, upper_tunnel: number, frequency: number) => void;
+    onEnableMonitoring: (symbol: string, lower_tunnel: number, upper_tunnel: number, frequency: number, email: string) => void;
 }
 
 const AssetList: React.FC<Props> = ({ assets, onEnableMonitoring, onDisableMonitoring }) => {
