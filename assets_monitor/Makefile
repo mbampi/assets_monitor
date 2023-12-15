@@ -4,6 +4,7 @@ clean:
 	rm -f db.sqlite3
 	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 	find . -path "*/migrations/*.pyc" -delete
+	find . -path "*/__pycache__/*" -delete
 
 makemigrations:
 	python manage.py makemigrations

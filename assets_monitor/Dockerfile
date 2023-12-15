@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-RUN python manage.py fetch_assets
+EXPOSE 8000
